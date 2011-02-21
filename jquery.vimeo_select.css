@@ -3,11 +3,11 @@
 }
 
 .vs_container.large {
-	width: 670px;
+	width: 675px;
 }
 
 .vs_container.medium {
-	width: 235px;
+	width: 220px;
 }
 
 .vs_container.small {
@@ -47,7 +47,7 @@
 
 .vs_video.selected,
 .vs_video.selected:hover {
-	border: 1px solid red;
+	border: 1px solid green;
 }
 
 .vs_video:hover {
