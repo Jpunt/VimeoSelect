@@ -14,7 +14,9 @@
 		var defaults 	= {
 			api_url:'http://vimeo.com/api/v2/',
 			thumbnail_size: 'medium',
-			text_help: 'Select video:'
+			text_help: 'Select video:',
+			text_close: 'X',
+			auto_hide: false
 		};
 
 		var settings = $.extend(defaults, options);
@@ -32,7 +34,7 @@
 		$container.append($videos);
 
 		//Add close-button
-		var $close = $('<a>x</a>').addClass('vs_close').click(function() {
+		var $close = $('<a>'+settings.text_close+'</a>').addClass('vs_close').click(function() {
 			$container.hide();
 		});
 		$header.append($close);
@@ -58,6 +60,7 @@
 					$videos.find('.vs_video').removeClass('selected');
 					$(this).addClass('selected');
 					$input.val(video.id);
+					if(settings.auto_hide) $container.hide();
 				});
 				$videos.append($video);				
 				$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
@@ -70,8 +73,5 @@
 			$container.show();
 		});
 		
-		
-					$container.show();
-
 	};
 })(jQuery);
