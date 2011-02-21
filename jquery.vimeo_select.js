@@ -4,9 +4,9 @@
 */
 
 (function($) {
-	$.fn.vimeo_select = function(options) {
+	$.fn.vimeo_select = function(user_id, options) {
 
-		if(!options.user_id) {
+		if(!user_id) {
 			alert('No user_id given');
 			return false;
 		}
@@ -45,12 +45,14 @@
 		//Get video's
 		var status;
 		$.ajax({
-			url: settings.api_url + settings.user_id + '/videos.json', 
+			url: settings.api_url + user_id + '/videos.json', 
 			dataType: 'json',			
 			success: setupVideos,
-			complete: function(req, status) {
-				status = req.status;
-				if(status!=200) $help.text("Something went wrong while fetching video's");
+			complete: function(req) {
+				if(req.status!=200) {
+					$help.text("Error "+req.status+" while fetching video's");
+					$videos.hide();
+				}
 			}
 		});
 		
