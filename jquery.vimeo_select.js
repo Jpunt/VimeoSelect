@@ -22,19 +22,23 @@
 		console.log(settings);
 		
 		var $input 			= $(this);
-		var $container	= $input.wrap('<div></div>').parent('div').addClass('vs_container');
-		var $videos 		= $('<div></div>').addClass('vs_videos').addClass(settings.thumbnail_size).hide();
+		var $container	= $('<div></div>').addClass('vs_container').addClass(settings.thumbnail_size).hide();
+		$input.after($container);
+
+		var $header = $('<div></div>').addClass('vs_header');
+		$container.append($header);
+
+		var $videos 		= $('<div></div>').addClass('vs_videos');
 		$container.append($videos);
 
 		//Add close-button
 		var $close = $('<a>x</a>').addClass('vs_close').click(function() {
-			$videos.hide();
+			$container.hide();
 		});
-		$videos.append($close);
-		
+		$header.append($close);
 		//Add help-title
 		var $help = $('<h1>'+settings.text_help+'</h1>').addClass('vs_help');
-		$videos.append($help);
+		$header.append($help);
 		
 		//Get video's
 		var status;
@@ -51,8 +55,9 @@
 		function setupVideos(videos) {
 			$.each(videos, function(i, video) {
 				$video = $('<div></div>').addClass('vs_video').click(function() {
+					$videos.find('.vs_video').removeClass('selected');
+					$(this).addClass('selected');
 					$input.val(video.id);
-					$videos.hide();
 				});
 				$videos.append($video);				
 				$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
@@ -62,10 +67,11 @@
 		
 		//Show video's
 		$(this).focus(function() {
-			$videos.show();
+			$container.show();
 		});
+		
+		
+					$container.show();
 
-		//tmp
-		$videos.show();
 	};
 })(jQuery);

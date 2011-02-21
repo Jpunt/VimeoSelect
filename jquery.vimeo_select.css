@@ -1,26 +1,36 @@
-.vs_container {}
+.vs_container {
+	text-align: center;
+}
+
+.vs_container.large {
+	width: 670px;
+}
+
+.vs_container.medium {
+	width: 235px;
+}
+
+.vs_container.small {
+	width: 140px;
+}
 
 .vs_videos {
 	border: 1px solid #e5e5e5;
 	background-color: #f2f2f2;
-	padding: 5px;
+	padding: 5px 0;
 	overflow: auto;
-	text-align: center;
-}
-
-.vs_videos.large {
-	width: 655px;
-	max-height: 655px;
-}
-
-.vs_videos.medium {
-	width: 230px;
+	width: 100%;
+	height: 100%;
 	max-height: 450px;
 }
 
-.vs_videos.small {
-	width: 140px;
-	max-height: 450px;
+.vs_header {
+	border: 1px solid #e5e5e5;
+	border-bottom: none;
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 20px;
+	padding: 5px 0 0 0;
 }
 
 .vs_help {
@@ -29,10 +39,15 @@
 }
 
 .vs_video {
-	margin-top: 10px;
-	padding: 10px 0 5px 0;
+	margin: 0 5px;
+	margin-bottom: 15px;
 	cursor: pointer;
 	border: 1px solid transparent;
+}
+
+.vs_video.selected,
+.vs_video.selected:hover {
+	border: 1px solid red;
 }
 
 .vs_video:hover {
