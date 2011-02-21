@@ -13,12 +13,8 @@
 			
 		var defaults 	= {
 			api_url:'http://vimeo.com/api/v2/',
-			class_container: 'vs_container',
-			class_videos: 'vs_videos',
-			class_video: 'vs_video',
-			class_title: 'vs_title',
-			class_close: 'vs_close',
-			thumbnail_size: 'medium'
+			thumbnail_size: 'medium',
+			text_help: 'Select video'
 		};
 
 		var settings 	= $.extend(defaults, options);
@@ -26,20 +22,20 @@
 		console.log(settings);
 		
 		var $input 			= $(this);
-		var $container	= $input.wrap('<div></div>').parent('div').addClass(settings.class_container);
-		var $videos 		= $('<div></div>').addClass(settings.class_videos).hide();
+		var $container	= $input.wrap('<div></div>').parent('div').addClass('vs_container');
+		var $videos 		= $('<div></div>').addClass('vs_videos').addClass(settings.thumbnail_size).hide();
 		$container.append($videos);
-		
+				
 		//Get video's
 		$.getJSON(settings.api_url + settings.user_id + '/videos.json', function(data) {				
 			$.each(data, function(i, video) {
-				$video = $('<div></div>').addClass(settings.class_video).click(function() {
+				$video = $('<div></div>').addClass('vs_video').click(function() {
 					$input.val(video.id);
 					$videos.hide();
 				});
 				$videos.append($video);				
-				$('<p>'+video.title+'</p>').addClass(settings.class_title).appendTo($video);
-				$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+settings.thumbnail_size]).addClass(settings.class_thumbnail).appendTo($video);					
+				$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
+				$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);					
 			});			
 		});
 		
@@ -49,10 +45,16 @@
 		});
 		
 		//Add close-button
-		$close = $('<a>x</a>').addClass(settings.class_close).click(function() {
+		$close = $('<a>x</a>').addClass('vs_close').click(function() {
 			$videos.hide();
 		});
 		$videos.append($close);
+		
+		//Add help-title
+		$('<h1>'+settings.text_help+'</h1>').addClass('vs_help').appendTo($videos);
+
+		//tmp
+		$videos.show();
 		
 	};
 })(jQuery);
