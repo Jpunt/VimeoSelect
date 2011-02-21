@@ -6,7 +6,21 @@
 	padding: 5px;
 	overflow: auto;
 	text-align: center;
-	max-height: 500px;
+}
+
+.vs_videos.large {
+	width: 655px;
+	max-height: 655px;
+}
+
+.vs_videos.medium {
+	width: 230px;
+	max-height: 450px;
+}
+
+.vs_videos.small {
+	width: 140px;
+	max-height: 450px;
 }
 
 .vs_help {
@@ -14,20 +28,9 @@
 	font-size: 12px;
 }
 
-.vs_videos.large {
-	width: 655px;
-}
-
-.vs_videos.medium {
-	width: 220px;
-}
-
-.vs_videos.small {
-	width: 100px;
-}
-
 .vs_video {
-	margin-top: 15px;
+	margin-top: 10px;
+	padding: 10px 0 5px 0;
 	cursor: pointer;
 	border: 1px solid transparent;
 }
@@ -39,8 +42,6 @@
 
 .vs_title {
 	font-size: 11px;
-	margin: 0;
-	padding: 0;
 	margin-bottom: 2px;
 }
 
