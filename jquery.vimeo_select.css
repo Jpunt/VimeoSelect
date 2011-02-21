@@ -39,8 +39,7 @@
 }
 
 .vs_video {
-	margin: 0 5px;
-	margin-bottom: 15px;
+	margin: 10px 5px;
 	padding-top: 2px;
 	cursor: pointer;
 	border: 1px solid transparent;
