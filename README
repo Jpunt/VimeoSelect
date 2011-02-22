@@ -1,11 +1,11 @@
-This plugin will probably be most used in an admin-environment. Simply apply it to an input-field that'll save an vimeo-video-id and supply it with your vimeo-user-id (shortcut URL or ID).
+Live demo:
+http://playground.jpunt.nl/jQuery/VimeoSelect/example.html
 
+This plugin will probably be most used in an admin-environment. Simply apply it to an input-field that'll save an vimeo-video-id and supply it with your vimeo-user-id (shortcut URL or ID).
 $('input[name=vimeo-video-id]').vimeo_select('jpunt');
 $('input[name=vimeo-video-id]').vimeo_select(2650748);
 
-
 You can also add some additional settings:
-
 $('input[name=vimeo-video-id]').vimeo_select(2650748, {auto_hide:true, thumbnail_size:'large'});
 
 auto_size: This will automatically hide the select-box when a video is selected.
