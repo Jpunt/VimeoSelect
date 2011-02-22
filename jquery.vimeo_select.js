@@ -20,8 +20,6 @@
 		};
 
 		var settings = $.extend(defaults, options);
-		console.log('settings:');
-		console.log(settings);
 		
 		var $input 			= $(this);
 		var $container	= $('<div></div>').addClass('vs_container').addClass(settings.thumbnail_size).hide();
@@ -42,13 +40,23 @@
 		var $help = $('<h1>'+settings.text_help+'</h1>').addClass('vs_help');
 		$header.append($help);
 		
-		//Get video's
-		var status;
 		$.ajax({
 			url: settings.api_url + user_id + '/videos.json', 
-			dataType: 'json',			
-			success: setupVideos,
-			complete: function(req) {
+			dataType: 'jsonp',	
+			success: function(data) {
+				$.each(data, function(i, video) {
+					$video = $('<div></div>').addClass('vs_video').click(function() {
+						$videos.find('.vs_video').removeClass('selected');
+						$(this).addClass('selected');
+						$input.val(video.id);
+						if(settings.auto_hide) $container.hide();
+					});
+					$videos.append($video);				
+					$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
+					$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);					
+				});
+			},
+			complete: function(req, status) {
 				if(req.status!=200) {
 					$help.text("Error "+req.status+" while fetching video's");
 					$videos.hide();
@@ -56,21 +64,6 @@
 			}
 		});
 		
-		function setupVideos(videos) {
-			$.each(videos, function(i, video) {
-				$video = $('<div></div>').addClass('vs_video').click(function() {
-					$videos.find('.vs_video').removeClass('selected');
-					$(this).addClass('selected');
-					$input.val(video.id);
-					if(settings.auto_hide) $container.hide();
-				});
-				$videos.append($video);				
-				$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
-				$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);					
-			});
-		};		
-		
-		//Show video's
 		$(this).focus(function() {
 			$container.show();
 		});
