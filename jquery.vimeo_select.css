@@ -43,6 +43,8 @@
 	padding-top: 2px;
 	cursor: pointer;
 	border: 1px solid transparent;
+	clear: both;
+	overflow: hidden;
 }
 
 .vs_video.selected,
