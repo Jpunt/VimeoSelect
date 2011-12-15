@@ -1,4 +1,6 @@
-Live demo:
+## Vimeo_Select
+
+# Live demo:
 http://playground.jpunt.nl/jQuery/VimeoSelect/example.html
 
 This plugin will probably be most used in an admin-environment. Simply apply it to an input-field that'll save an vimeo-video-id and supply it with your vimeo-user-id (shortcut URL or ID).
@@ -8,9 +10,9 @@ $('input[name=vimeo-video-id]').vimeo_select(2650748);
 You can also add some additional settings:
 $('input[name=vimeo-video-id]').vimeo_select(2650748, {auto_hide:true, thumbnail_size:'large'});
 
-auto_size: This will automatically hide the select-box when a video is selected.
-thumbnail_size: Setup the size of thumbnails (large/medium/small)
-text_help: Title in top of the select-box
-text_close: Text instead of just "x"
+- auto_size: This will automatically hide the select-box when a video is selected.
+- thumbnail_size: Setup the size of thumbnails (large/medium/small)
+- text_help: Title in top of the select-box
+- text_close: Text instead of just "x"
 
 Styling is really basic, but easily overridden with classes vs_container, vs_header, vs_videos, etc
