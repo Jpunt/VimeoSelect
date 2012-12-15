@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
   <script src="../libs/qunit/qunit.js"></script>
   <!-- Load local lib and tests. -->
-  <script src="../src/VimeoSelect.js"></script>
+  <script src="../src/js/jquery.vimeo_select.js"></script>
   <script src="VimeoSelect_test.js"></script>
   <!-- Removing access to jQuery and $. But it'll still be available as _$, if
        you REALLY want to mess around with jQuery in the console. REMEMBER WE
@@ -23,9 +23,8 @@
   <h2 id="qunit-userAgent"></h2>
   <ol id="qunit-tests"></ol>
   <div id="qunit-fixture">
-    <span>lame test markup</span>
-    <span>normal test markup</span>
-    <span>awesome test markup</span>
+    <input type="text" id="vimeo-id"    placeholder="Vimeo-ID">
+    <input type="text" id="vimeo-thumb" placeholder="Thumbnail-URL">
   </div>
 </body>
 </html>
