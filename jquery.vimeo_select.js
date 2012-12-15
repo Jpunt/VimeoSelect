@@ -88,17 +88,12 @@
 		};
 
 		self.show = function() {
-			var height = self.$container.show().height();
-			self.$container.height(0).animate({'height':height}, 200, function() {
-				self.$container.height('auto');
-			});
+			self.$container.slideDown(150);
 			self.settings.show();
 		};
 
 		self.hide = function() {
-			self.$container.animate({'height':0}, 200, function() {
-				self.$container.height('auto').hide();
-			});
+			self.$container.slideUp(100);
 		};
 
 		self.init();
