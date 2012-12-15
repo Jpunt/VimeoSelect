@@ -24,20 +24,17 @@
 		}
 
 		self.init = function() {
-			self.$container = $('<div></div>').addClass('vs-container').addClass(self.options.thumbnail_size).hide();
+			self.$container = $('<div class="vs-container '+self.options.thumbnail_size+'" />');
 			self.$input.after(self.$container);
 
-			self.$close = $('<a href="#">x</a>').addClass('vs-close');
+			self.$close = $('<a href="#" class="vs-close">x</a>');
 			self.$container.append(self.$close);
-			self.$container.find('.vs-close').click(function(e) {
+			self.$close.click(function(e) {
 				e.preventDefault();
 				self.hide();
 			});
 
-			self.$header = $('<div></div>').addClass('vs-header');
-			self.$container.append(self.$header);
-
-			self.$videos = $('<div></div>').addClass('vs-videos');
+			self.$videos = $('<div class="vs-videos" />');
 			self.$container.append(self.$videos);
 
 			self.$input.focus(self.show);
