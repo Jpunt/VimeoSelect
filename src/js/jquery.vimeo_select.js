@@ -42,6 +42,10 @@
 				self.$input.blur(self.hide);
 			}
 
+			$('.vs-container .vs-videos .vs-video').live('click', function(e) {
+				self.select($(e.currentTarget));
+			});
+
 			self.load();
 		};
 
@@ -49,32 +53,43 @@
 			$.ajax({
 				url: self.options.api_url + self.user_id + '/videos.json',
 				dataType: 'jsonp',
-				success: function(data) {
-					$.each(data, function(i, video) {
-						var $video = $('<div></div>').addClass('vs-video').click(function(e) {
-							self.select($(e.currentTarget), video);
-						});
-						self.$videos.append($video);
-						$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+self.options.thumbnail_size]).addClass('vs-thumbnail').appendTo($video);
-						$('<p>'+video.title+'</p>').addClass('vs-video-title').appendTo($video);
-					});
-					self.$videos.find('.vs-video:last').addClass('last');
-				},
+				success: self.setVideos,
 				complete: function(req, status) {
 					if(req.status !== 200) {
-						self.$videos.hide();
+						self.showError();
 					}
 				}
 			});
 		};
 
-		self.select = function($video, video) {
+		self.setVideos = function(videos) {
+			var html = '';
+			$.each(videos, function(i, video) {
+				// Container
+				html += '<div class="vs-video ' + (i === videos.length ? 'last':'') + '"';
+				html += ' data-id="' + video.id + '" data-thumbnail="' + video.thumbnail_large + '">';
+				// Thumbnail
+				html += '<img class="vs-thumbnail" src="' + video['thumbnail_'+self.options.thumbnail_size] + '" alt="thumbnail" />';
+				// Title
+				html += '<p class="vs-video-title">' + video.title + '</p>';
+				// Close up
+				html += '</div>';
+			});
+			self.$videos.html(html);
+		};
+
+		self.showError = function() {
+			window.alert('could not load videos');
+		};
+
+		self.select = function($video) {
 			self.$videos.find('.vs-video').removeClass('selected');
 			$video.addClass('selected');
-			self.$input.val(video.id);
+			self.$input.val($video.data('id'));
 			if(self.options.remote_thumbnail_input !== false) {
-				self.options.remote_thumbnail_input.val(video.thumbnail_large);
+				self.options.remote_thumbnail_input.val($video.data('thumbnail'));
 			}
+			self.hide();
 		};
 
 		self.show = function() {
