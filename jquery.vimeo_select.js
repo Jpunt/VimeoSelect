@@ -11,62 +11,96 @@
 			return false;
 		}
 			
-		var defaults 	= {
+		var defaults = {
 			api_url:'http://vimeo.com/api/v2/',
 			thumbnail_size: 'medium',
-			text_help: 'Select video:',
-			text_close: 'X',
-			auto_hide: false
+			auto_hide: false,
+			hide_on_blur: true,
+			remote_thumbnail_input: false,
+			show: function() {}
 		};
 
-		var settings = $.extend(defaults, options);
+		var self = this;
+				self.settings = $.extend(defaults, options);
+				self.user_id	= user_id;
+				self.$input		= $(this);
 		
-		var $input 			= $(this);
-		var $container	= $('<div></div>').addClass('vs_container').addClass(settings.thumbnail_size).hide();
-		$input.after($container);
+		self.init = function() {
+			self.$container = $('<div></div>').addClass('vs_container').addClass(self.settings.thumbnail_size).hide();
+			self.$input.after(self.$container);
 
-		var $header = $('<div></div>').addClass('vs_header');
-		$container.append($header);
+			self.$close = $('<a href="#">x</a>').addClass('close');
+			self.$container.append(self.$close);
+			self.$container.find('.close').click(function(e) {
+				e.preventDefault();
+				self.hide();
+			});
 
-		var $videos 		= $('<div></div>').addClass('vs_videos');
-		$container.append($videos);
+			self.$header = $('<div></div>').addClass('vs_header');
+			self.$container.append(self.$header);
 
-		//Add close-button
-		var $close = $('<a>'+settings.text_close+'</a>').addClass('vs_close').click(function() {
-			$container.hide();
-		});
-		$header.append($close);
-		//Add help-title
-		var $help = $('<h1>'+settings.text_help+'</h1>').addClass('vs_help');
-		$header.append($help);
-		
-		$.ajax({
-			url: settings.api_url + user_id + '/videos.json', 
-			dataType: 'jsonp',	
-			success: function(data) {
-				$.each(data, function(i, video) {
-					$video = $('<div></div>').addClass('vs_video').click(function() {
-						$videos.find('.vs_video').removeClass('selected');
-						$(this).addClass('selected');
-						$input.val(video.id);
-						if(settings.auto_hide) $container.hide();
-					});
-					$videos.append($video);				
-					$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
-					$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);					
-				});
-			},
-			complete: function(req, status) {
-				if(req.status!=200) {
-					$help.text("Error "+req.status+" while fetching video's");
-					$videos.hide();
-				}
+			self.$videos = $('<div></div>').addClass('vs_videos');
+			self.$container.append(self.$videos);
+
+			self.$input.focus(self.show);
+			if(self.settings.hide_on_blur === true) {
+				self.$input.blur(self.hide);
 			}
-		});
-		
-		$(this).focus(function() {
-			$container.show();
-		});
-		
+
+			self.load();
+		};
+
+		self.load = function() {
+			$.ajax({
+				url: self.settings.api_url + self.user_id + '/videos.json',
+				dataType: 'jsonp',
+				success: function(data) {
+					$.each(data, function(i, video) {
+						var $video = $('<div></div>').addClass('vs_video').click(function(e) {
+							self.select($(e.currentTarget), video);
+						});
+						self.$videos.append($video);
+						$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+self.settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);
+						$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
+					});
+				},
+				complete: function(req, status) {
+					if(req.status!=200) {
+						$help.text("Error "+req.status+" while fetching video's");
+						$videos.hide();
+					}
+				}
+			});
+		};
+
+		self.select = function($video, video) {
+			console.log('vimeo.select ', $video, video);
+			self.$videos.find('.vs_video').removeClass('selected');
+			$video.addClass('selected');
+			self.$input.val(video.id);
+			if(self.settings.remote_thumbnail_input !== false) {
+				self.settings.remote_thumbnail_input.val(video.thumbnail_large);
+			}
+			if(self.settings.auto_hide) {
+				self.hide();
+			}
+		};
+
+		self.show = function() {
+			var height = self.$container.show().height();
+			self.$container.height(0).animate({'height':height}, 200, function() {
+				self.$container.height('auto');
+			});
+			self.settings.show();
+		};
+
+		self.hide = function() {
+			self.$container.animate({'height':0}, 200, function() {
+				self.$container.height('auto').hide();
+			});
+		};
+
+		self.init();
+		return self;
 	};
 })(jQuery);
