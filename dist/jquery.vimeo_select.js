@@ -1,7 +1,6 @@
-/**
-* @author Jasper Haggenburg
-* @url http://jpunt.nl/
-*/
+/*! Vimeoselect - v0.1.0 - 2012-12-15
+* https://github.com/Jpunt/VimeoSelect
+* Copyright (c) 2012 Jasper Haggenburg; Licensed MIT */
 
 (function($) {
 

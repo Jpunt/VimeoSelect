@@ -1,0 +1,29 @@
+{
+  "name": "VimeoSelect",
+  "title": "Vimeoselect",
+  "description": "Get a list of video's of a specific channel and retreive a video-id.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Jpunt/VimeoSelect",
+  "author": {
+    "name": "Jasper Haggenburg",
+    "email": "jasper@jpunt.nl",
+    "url": "http://jpunt.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jpunt/VimeoSelect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jpunt/VimeoSelect/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Jpunt/VimeoSelect/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
