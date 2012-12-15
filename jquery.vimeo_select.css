@@ -1,81 +1,41 @@
-.vs_container {
-	text-align: center;
+.vs-container {
+	position: relative;
+	text-align: left;
+	width: 333px;
+	padding: 2px;
 }
 
-.vs_container.large {
-	width: 675px;
+.vs-close {
+	position: absolute;
+	top: 0;
+	right: -1em;
 }
 
-.vs_container.medium {
-	width: 220px;
+.vs-header {
+	display: none;
 }
 
-.vs_container.small {
-	width: 140px;
-}
-
-.vs_videos {
-	border: 1px solid #e5e5e5;
-	border-top: none;
-	background-color: #fcfcfc;
-	padding: 5px 0;
+.vs-videos {
 	overflow: auto;
 	width: 100%;
 	height: 100%;
-	max-height: 450px;
+	max-height: 360px;
 }
 
-.vs_header {
-	border: 1px solid #e5e5e5;
-	background-color: #f2f2f2;
-	width: 100%;
-	height: 20px;
-	padding: 5px 0 0 0;
-}
-
-.vs_help {
-	margin: 2px 10px;
-	font-size: 12px;
-}
-
-.vs_video {
-	margin: 10px 5px;
-	padding-top: 2px;
+.vs-video {
+	padding: 2px;
 	cursor: pointer;
-	border: 1px solid transparent;
 	clear: both;
 	overflow: hidden;
 }
 
-.vs_video.selected,
-.vs_video.selected:hover {
-	border: 1px solid green;
-}
-
-.vs_video:hover {
-	background-color: white; 
-	border-color: #ccc;
-}
-
-.vs_title {
+.vs-title {
 	font-size: 11px;
-	margin-bottom: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
-.vs_thumbnail {}
-
-.vs_close {
-	cursor: pointer;
-	float: right;
-	padding: 2px;	
-	margin-right: 2px;
-	font-size: 10px;
-	border: 1px solid transparent;	
-	color: #7f7f7f;
-}
-
-.vs_close:hover {
-	border: 1px solid #cccccc;
-	color: black;
-	background-color: #f8f8f8;
+.vs-thumbnail {
+	float: left;
+	margin-right: 5px;
 }

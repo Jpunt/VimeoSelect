@@ -26,20 +26,20 @@
 				self.$input		= $(this);
 		
 		self.init = function() {
-			self.$container = $('<div></div>').addClass('vs_container').addClass(self.settings.thumbnail_size).hide();
+			self.$container = $('<div></div>').addClass('vs-container').addClass(self.settings.thumbnail_size).hide();
 			self.$input.after(self.$container);
 
-			self.$close = $('<a href="#">x</a>').addClass('close');
+			self.$close = $('<a href="#">x</a>').addClass('vs-close');
 			self.$container.append(self.$close);
-			self.$container.find('.close').click(function(e) {
+			self.$container.find('.vs-close').click(function(e) {
 				e.preventDefault();
 				self.hide();
 			});
 
-			self.$header = $('<div></div>').addClass('vs_header');
+			self.$header = $('<div></div>').addClass('vs-header');
 			self.$container.append(self.$header);
 
-			self.$videos = $('<div></div>').addClass('vs_videos');
+			self.$videos = $('<div></div>').addClass('vs-videos');
 			self.$container.append(self.$videos);
 
 			self.$input.focus(self.show);
@@ -56,13 +56,14 @@
 				dataType: 'jsonp',
 				success: function(data) {
 					$.each(data, function(i, video) {
-						var $video = $('<div></div>').addClass('vs_video').click(function(e) {
+						var $video = $('<div></div>').addClass('vs-video').click(function(e) {
 							self.select($(e.currentTarget), video);
 						});
 						self.$videos.append($video);
-						$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+self.settings.thumbnail_size]).addClass('vs_thumbnail').appendTo($video);
-						$('<p>'+video.title+'</p>').addClass('vs_title').appendTo($video);
+						$('<img alt="thumbnail" />').attr('src', video['thumbnail_'+self.settings.thumbnail_size]).addClass('vs-thumbnail').appendTo($video);
+						$('<p>'+video.title+'</p>').addClass('vs-title').appendTo($video);
 					});
+					self.$videos.find('.vs-video:last').addClass('last');
 				},
 				complete: function(req, status) {
 					if(req.status!=200) {
@@ -75,7 +76,7 @@
 
 		self.select = function($video, video) {
 			console.log('vimeo.select ', $video, video);
-			self.$videos.find('.vs_video').removeClass('selected');
+			self.$videos.find('.vs-video').removeClass('selected');
 			$video.addClass('selected');
 			self.$input.val(video.id);
 			if(self.settings.remote_thumbnail_input !== false) {
