@@ -4,10 +4,13 @@
 */
 
 (function($) {
+
+	"use strict";
+
 	$.fn.vimeo_select = function(user_id, options) {
 
 		if(!user_id) {
-			alert('No user_id given');
+			window.alert('No user_id given');
 			return false;
 		}
 			
@@ -65,16 +68,14 @@
 					self.$videos.find('.vs-video:last').addClass('last');
 				},
 				complete: function(req, status) {
-					if(req.status!=200) {
-						$help.text("Error "+req.status+" while fetching video's");
-						$videos.hide();
+					if(req.status !== 200) {
+						self.$videos.hide();
 					}
 				}
 			});
 		};
 
 		self.select = function($video, video) {
-			console.log('vimeo.select ', $video, video);
 			self.$videos.find('.vs-video').removeClass('selected');
 			$video.addClass('selected');
 			self.$input.val(video.id);
