@@ -15,11 +15,11 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/js/jquery.vimeo_select.js>'],
+        src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
         dest: 'dist/jquery.vimeo_select.js'
       },
       css: {
-        src: ['<banner:meta.banner>', 'src/css/jquery.vimeo_select.css'],
+        src: ['<banner:meta.banner>', 'src/<%= pkg.name %>.css'],
         dest: 'dist/jquery.vimeo_select.css'
       }
     },
