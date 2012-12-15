@@ -1,5 +1,6 @@
 .vs-container {
 	position: relative;
+	display: none;
 	text-align: left;
 	width: 333px;
 	padding: 2px;
@@ -9,10 +10,6 @@
 	position: absolute;
 	top: 0;
 	right: -1em;
-}
-
-.vs-header {
-	display: none;
 }
 
 .vs-videos {
