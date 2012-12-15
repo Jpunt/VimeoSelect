@@ -4,6 +4,7 @@
 
 .vs-container {
 	position: relative;
+	display: none;
 	text-align: left;
 	width: 333px;
 	padding: 2px;
@@ -13,10 +14,6 @@
 	position: absolute;
 	top: 0;
 	right: -1em;
-}
-
-.vs-header {
-	display: none;
 }
 
 .vs-videos {
@@ -33,7 +30,7 @@
 	overflow: hidden;
 }
 
-.vs-title {
+.vs-video-title {
 	font-size: 11px;
 	margin-left: 5px;
 	margin-right: 5px;
