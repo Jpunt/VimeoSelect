@@ -14,7 +14,6 @@
 		var defaults = {
 			api_url:'http://vimeo.com/api/v2/',
 			thumbnail_size: 'medium',
-			auto_hide: false,
 			hide_on_blur: true,
 			remote_thumbnail_input: false,
 			show: function() {}
@@ -81,9 +80,6 @@
 			self.$input.val(video.id);
 			if(self.settings.remote_thumbnail_input !== false) {
 				self.settings.remote_thumbnail_input.val(video.thumbnail_large);
-			}
-			if(self.settings.auto_hide) {
-				self.hide();
 			}
 		};
 
